@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-
+import { useState } from "react";
+import logo from "../img/logo.png";
 export const Header = () => {
   const darkMode = false;
   const hidden = false;
-  const isActive = true;
+  const [esActive, setEsActive] = useState(true);
 
   const activeClass =
     "text-base block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white";
@@ -14,10 +15,10 @@ export const Header = () => {
     <header>
       <nav className="bg-white border-b-2 border-gray-200 px-2 sm:px-4 py-2 dark:bg-gray-900 dark:border-b-1 dark:border-gray-900">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
-          {/*<Link to="/" className="flex items-center">
-          <img src={logo} className="mr-2 h-6 sm:h-9" alt="Cinemate Logo" />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Cinema Paradise</span>
-  </Link>*/}
+          <Link to="/" className="flex items-center">
+            <img src={logo} className="mr-2 h-6 sm:h-9" alt="Cinemate Logo" />
+            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"></span>
+          </Link>
 
           <div id="mobile-nav" className="flex md:order-2">
             <button
@@ -125,7 +126,6 @@ export const Header = () => {
               </svg>
             </button>
           </div>
-
           <div
             className={`${
               hidden ? "hidden" : ""
@@ -161,55 +161,18 @@ export const Header = () => {
             </div>
             <ul className="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               <li>
-                <Link
-                  to="/"
-                  className={({ isActive }) =>
-                    isActive ? activeClass : inActiveClass
-                  }
-                  end
-                >
+                <Link to="/" className={activeClass}>
                   Home
                 </Link>
               </li>
               <li>
-                <Link
-                  to="About"
-                  className={({ isActive }) =>
-                    isActive ? activeClass : inActiveClass
-                  }
-                  end
-                >
-                  About
+                <Link to="About" className={activeClass}>
+                  LeaderBoard
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/movies/popular"
-                  className={({ isActive }) =>
-                    isActive ? activeClass : inActiveClass
-                  }
-                >
-                  Popular
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/movies/top"
-                  className={({ isActive }) =>
-                    isActive ? activeClass : inActiveClass
-                  }
-                >
-                  Top Rated
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/movies/upcoming"
-                  className={({ isActive }) =>
-                    isActive ? activeClass : inActiveClass
-                  }
-                >
-                  Upcoming
+                <Link to="/movies/popular" className={activeClass}>
+                  New
                 </Link>
               </li>
             </ul>
