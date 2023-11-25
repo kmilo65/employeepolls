@@ -1,18 +1,11 @@
-import {
-  createSlice,
-  createAsyncThunk,
-  createEntityAdapter,
-} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { _getQuestions } from "../data/_DATA";
 
-const questionsAdapter = createEntityAdapter({
-  sortComparer: (a, b) => b.timestamp.localeCompare(a.timestamp),
-});
-
-const initialState = questionsAdapter.getInitialState({
+const initialState = {
+  questions: [],
   status: "idle", //'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
-});
+};
 
 export const fetchQuestions = createAsyncThunk(
   "questions/fetchQuestions",
@@ -35,13 +28,11 @@ export const questionsSlice = createSlice({
       })
       .addCase(fetchQuestions.fulfilled, (state, action) => {
         state.status = "succeeded";
-        // Adding date and reactions
         const loadedQuestions = action.payload.map((question) => {
           return question;
         });
-        // Add any fetched question to the array
-        questionsAdapter.upsertMany(state, loadedQuestions);
       })
+
       .addCase(fetchQuestions.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
